@@ -1,0 +1,12 @@
+{
+  "name": "skins",
+  "displayName": "skins",
+  "expo": {
+    "name": "skins",
+    "slug": "skins",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}

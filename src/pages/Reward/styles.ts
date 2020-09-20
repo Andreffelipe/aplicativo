@@ -44,7 +44,7 @@ export const Title = styled.Text`
     margin-top: 25;
     margin-bottom: 25;
     color: ${Style.text};
-    font-size: 35;
+    font-size: 34;
 `;
 export const Contador = styled.View`
     background-color: ${Style.banner};

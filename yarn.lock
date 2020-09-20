@@ -2109,6 +2109,11 @@
     lodash "^4.5.0"
     prop-types "^15.6.1"
 
+"@wowmaking/react-native-iron-source@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@wowmaking/react-native-iron-source/-/react-native-iron-source-7.0.0.tgz#216971f891149471dee17276e67e4f86bbe75cc5"
+  integrity sha512-o8FwoaEcNzJmqfaHszZmA4zp2p4OWiQuCks8Tg5YA4TXjk16TMocdgCo1GmN5lUnWowZ0eQjIw0FOIRF2FKBlg==
+
 abab@^2.0.0:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/abab/-/abab-2.0.5.tgz#c0b678fb32d60fc1219c784d6a826fe385aeb79a"
@@ -6729,6 +6734,11 @@ react-native-screens@~2.9.0:
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/react-native-screens/-/react-native-screens-2.9.0.tgz#ead2843107ba00fee259aa377582e457c74f1f3b"
   integrity sha512-5MaiUD6HA3nzY3JbVI8l3V7pKedtxQF3d8qktTVI0WmWXTI4QzqOU8r8fPVvfKo3MhOXwhWBjr+kQ7DZaIQQeg==
+
+react-native-snackbar@^2.2.3:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/react-native-snackbar/-/react-native-snackbar-2.2.3.tgz#0b1df239569d27372f1f7244bad5d1615d188a3f"
+  integrity sha512-JDS3S50i7F2w8X5JQyamNc/cVHYHAxd74VETeNQ1rB73lClWk2J99xEWgRz2r6hPHhJMEp9dGR7NZMYAVS4ozQ==
 
 react-native-unimodules@~0.10.1:
   version "0.10.1"

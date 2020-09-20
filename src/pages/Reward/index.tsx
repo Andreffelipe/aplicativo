@@ -3,9 +3,20 @@ import { AntDesign,Entypo } from '@expo/vector-icons';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import Item from '../component/Item1';
 import { Container,Bonus,Menu,Title,Status,Contador,ContText,TextButton,MsgText,Botao,VideoButton,VideoText } from './styles';
-import { View,Text } from 'react-native';
+import { IronSource } from '@wowmaking/react-native-iron-source';
+import IronSourceController from '../../controller/isronSource';
+
+interface Iron{
+  componentDidMount: Function;
+  showRewardedVideo: Function;
+  showOfferwall: Function;
+}
 
 const Reward: React.FC = ({ navigation }) => {
+  var ironSourceController: Iron = new IronSourceController();
+  React.useEffect(()=>{
+    ironSourceController.componentDidMount();
+  },[])
 
 const[time, setTime] = React.useState('00:00');
 var bonusTimer = 60 * 5;
@@ -66,7 +77,7 @@ function bonus(){
         </Contador>
         
       </Bonus>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={()=> ironSourceController.showRewardedVideo()}>
         <VideoButton> 
           <VideoText>Watch Video</VideoText>
         </VideoButton>
@@ -74,7 +85,9 @@ function bonus(){
       <Title>Reward</Title>
       <ScrollView>
       <Menu>
-      <Item image={require("../../assets/ad.png")} name="TapJoy"/>
+      <TouchableOpacity onPress={()=> ironSourceController.showOfferwall()}>
+        <Item image={require("../../assets/IronSource.png")} name="IronSource"/>
+      </TouchableOpacity>
       <Item image={require("../../assets/ads.png")} name="Inmobi"/>
       </Menu>
       <Menu>

@@ -33,6 +33,8 @@ allprojects {
 
         google()
         jcenter()
+        maven { url "https://dl.bintray.com/ironsource-mobile/android-sdk" }
+    
         maven { url 'https://www.jitpack.io' }
     }
 }

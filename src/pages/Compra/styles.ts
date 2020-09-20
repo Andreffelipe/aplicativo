@@ -37,7 +37,8 @@ export const TextItem = styled.Text`
 `;
 export const TextPoint = styled.Text`
     font-size: 20;
-`;
+    color: white;
+    `;
 export const PointUser = styled.View`
     width: 130;
     margin-left: 4;

@@ -5,6 +5,7 @@ import { Text, View } from 'react-native';
 import {user} from '../../user/user';
 import { Container,Head,Status,PointUser,ShopUser,PointItem,TextPoint,TextItem } from './styles';
 import Item from '../component/Teste'
+import Snackbar from 'react-native-snackbar';
 
 
 const Compra: React.FC = ({navigation}) => {
@@ -16,8 +17,14 @@ const Compra: React.FC = ({navigation}) => {
           console.log(id);
           console.log(price);
         } else {
-          console.log("saldo insuficiente");
+          err("saldo insuficiente");
         }
+      }
+      const err = async (value: string)=>{
+        Snackbar.show({
+          text: `${value}`,
+          duration: Snackbar.LENGTH_SHORT,
+        });
       }
   return (
     <Container>
@@ -32,7 +39,7 @@ const Compra: React.FC = ({navigation}) => {
       <Head>
         <PointUser>
           <TextPoint>
-            {user?.pontos}
+            {user?.pontos} Points
           </TextPoint>
         </PointUser>
         <ShopUser>
@@ -40,7 +47,7 @@ const Compra: React.FC = ({navigation}) => {
         </ShopUser>
         <PointItem>
           <TextItem>
-            {item} Point
+            CS:GO
           </TextItem>
         </PointItem>
       </Head>

@@ -1,4 +1,9 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.skins">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+package="com.skins"
+xmlns:tools="http://schemas.android.com/tools"
+tools:replace="allowBackup"
+android:allowBackup="false"
+>
   <uses-permission android:name="android.permission.INTERNET"/>
   <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
   <!-- OPTIONAL PERMISSIONS, REMOVE WHATEVER YOU DO NOT NEED -->
@@ -21,12 +26,14 @@
   <uses-permission android:name="android.permission.WRITE_SETTINGS"/>
   <!-- END OPTIONAL PERMISSIONS -->
   <application
+    tools:replace="android:allowBackup"
     android:name=".MainApplication"
     android:label="@string/app_name"
     android:icon="@mipmap/ic_launcher"
     android:roundIcon="@mipmap/ic_launcher_round"
     android:allowBackup="false"
     android:theme="@style/AppTheme"
+    
   >
     <meta-data android:name="expo.modules.updates.EXPO_UPDATE_URL" android:value="YOUR-APP-URL-HERE"/>
     <meta-data android:name="expo.modules.updates.EXPO_SDK_VERSION" android:value="YOUR-APP-SDK-VERSION-HERE"/>

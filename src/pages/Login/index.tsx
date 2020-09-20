@@ -1,10 +1,12 @@
 import React from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import AsyncStorage from '@react-native-community/async-storage';
 import { setUser } from '../../user/user';
 import api from '../../service/api';
-import { Text,Alert} from 'react-native';
 import { Container,ImageBackground,Header,Main,Title,Input,Footer,Sign,
   ContainerSign,Already,Buton,ButtonText,Forgot } from './styles';
+import Snackbar from 'react-native-snackbar';
+import { Alert } from 'react-native';
 
 
 const Login: React.FC = ({ navigation }) => {
@@ -28,16 +30,27 @@ const Login: React.FC = ({ navigation }) => {
     })
     .then((response) => {
       var res = response.data.user;
-      //setUser(res._id, res.name, res.email, res.referal, res.pontos);
-      success(response.data.token);
+      setUser(res._id, res.name, res.email, res.steamid, res.referal, res.pontos);
+      storeData(response.data.token);
+      success()
     })
     .catch((error) => {
       console.log(error.response.data);
+      err('Login failed')
     })
     .finally(() => {
       console.log('finalizou');
+      
     });
   };
+
+  const storeData = async (value: string) => {
+    try {
+      await AsyncStorage.setItem('@storage_Key', value)
+    } catch (e) {
+      // saving error
+    }
+  }
 
   const createTwoButtonAlert = () =>
   Alert.alert(
@@ -54,7 +67,15 @@ const Login: React.FC = ({ navigation }) => {
     { cancelable: false }
   );
 
-  const success = async (value: string)=>{}
+  const success = async ()=>{
+    navigation.navigate("Home")
+  }
+  const err = async (value: string)=>{
+    Snackbar.show({
+      text: `${value}`,
+      duration: Snackbar.LENGTH_SHORT,
+    });
+  }
 
   return (
     <Container>

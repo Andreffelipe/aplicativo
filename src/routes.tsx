@@ -14,17 +14,20 @@ const Stack = createStackNavigator();
 
 function Routes({ navigation: any }) {
   var [islogged, setIslogged] = React.useState(true);
-  const getData = async () => {
-    try {
-      const value = await AsyncStorage.getItem('@storage_Key');
-      if (value !== null) {
-        //setIslogged(true);
+  
+  React.useEffect(()=>{
+    const getData = async () => {
+      try {
+        const value = await AsyncStorage.getItem('@storage_Key');
+        if (value !== null) {
+          setIslogged(true);
+        }
+      } catch (e) {
+        // error reading value
       }
-    } catch (e) {
-      // error reading value
-    }
-  };
-  getData();
+    };
+    getData();
+  },[])
 
   return (
     <NavigationContainer>

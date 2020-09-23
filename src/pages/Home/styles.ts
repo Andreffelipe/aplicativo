@@ -22,7 +22,7 @@ export const Status = styled.View`
 export const UserContainer = styled.View`
     align-items: center;
     justify-content: center;
-    height: ${windowHeight / 3};
+    height: ${windowHeight / 3.5};
 `;
 export const UserImage = styled.Image`
     height: 100;

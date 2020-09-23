@@ -6,6 +6,8 @@ const windowWidth = Dimensions.get('window').width;
 
 export const Container = styled.SafeAreaView`
     flex: 1;
+    align-items: center;
+    justify-content: center;
 `;
 export const ImageBackground = styled.ImageBackground`
     flex: 1;
@@ -13,7 +15,6 @@ export const ImageBackground = styled.ImageBackground`
     position: relative;
 `;
 export const Header = styled.View`
-    flex: 1;
     align-items: center;
     justify-content: center;
 `;
@@ -22,7 +23,7 @@ export const Title = styled.Text`
     font-size: 50;
 `;
 export const Main = styled.View`
-    flex: 1;
+
 `;
 export const Input = styled.TextInput`
     padding-left: 10;
@@ -72,4 +73,14 @@ export const Forgot = styled.Text`
     color: ${Style.text};
     margin-left: 20;
     margin-top: 20;
+`;
+export const PassCont = styled.View`
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: row;
+    margin-right: 20;
+    margin-top: 10;
+`;
+export const TextRemember = styled.Text`
+    color: ${Style.text};
 `;

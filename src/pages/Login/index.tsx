@@ -1,18 +1,21 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Switch, TouchableOpacity } from 'react-native-gesture-handler';
 import AsyncStorage from '@react-native-community/async-storage';
 import { setUser } from '../../user/user';
 import api from '../../service/api';
+import * as Keychain from 'react-native-keychain';
 import { Container,ImageBackground,Header,Main,Title,Input,Footer,Sign,
-  ContainerSign,Already,Buton,ButtonText,Forgot } from './styles';
+  ContainerSign,Already,Buton,ButtonText,Forgot,PassCont,TextRemember } from './styles';
 import Snackbar from 'react-native-snackbar';
-import { Alert } from 'react-native';
+import { Alert,Text } from 'react-native';
+import { useNavigation } from "@react-navigation/native";
 
-
-const Login: React.FC = ({ navigation }) => {
+const Login: React.FC = () => {
+  const navigation = useNavigation();
   const [username, setUsername] = React.useState('');
   const [password, setPassword] = React.useState('');
-
+  const [isEnabled, setIsEnabled] = React.useState(false);
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   interface Auth {
     username: string;
     password: string;
@@ -32,7 +35,8 @@ const Login: React.FC = ({ navigation }) => {
       var res = response.data.user;
       setUser(res._id, res.name, res.email, res.steamid, res.referal, res.pontos);
       storeData(response.data.token);
-      success()
+      security();
+      success();
     })
     .catch((error) => {
       console.log(error.response.data);
@@ -44,6 +48,29 @@ const Login: React.FC = ({ navigation }) => {
     });
   };
 
+  const security = async () => {
+    //const username = 'zuck';
+    //const password = 'poniesRgr8';
+  
+    // Store the credentials
+    await Keychain.setGenericPassword(username, password);
+  
+    try {
+      // Retrieve the credentials
+      const credentials = await Keychain.getGenericPassword();
+      if (credentials) {
+        console.log(
+          'Credentials successfully loaded for user ' + credentials.username
+        );
+      } else {
+        console.log('No credentials stored');
+      }
+    } catch (error) {
+      console.log("Keychain couldn't be accessed!", error);
+    }
+    await Keychain.resetGenericPassword();
+  };
+
   const storeData = async (value: string) => {
     try {
       await AsyncStorage.setItem('@storage_Key', value)
@@ -51,7 +78,6 @@ const Login: React.FC = ({ navigation }) => {
       // saving error
     }
   }
-
   const createTwoButtonAlert = () =>
   Alert.alert(
     "Alert Title",
@@ -66,7 +92,6 @@ const Login: React.FC = ({ navigation }) => {
     ],
     { cancelable: false }
   );
-
   const success = async ()=>{
     navigation.navigate("Home")
   }
@@ -98,6 +123,16 @@ const Login: React.FC = ({ navigation }) => {
       value={password}
       secureTextEntry
       />
+      <PassCont>
+        <TextRemember>lembra loguin</TextRemember>
+        <Switch
+        trackColor={{ false: "#767577", true: "#81b0ff" }}
+        thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+        ios_backgroundColor="#3e3e3e"
+        onValueChange={toggleSwitch}
+        value={isEnabled}
+      />
+      </PassCont>
       <Footer>
         <ContainerSign>
           <Already>

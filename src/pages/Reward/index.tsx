@@ -3,8 +3,8 @@ import { AntDesign,Entypo } from '@expo/vector-icons';
 import { ScrollView, TouchableOpacity } from 'react-native-gesture-handler';
 import Item from '../component/Item1';
 import { Container,Bonus,Menu,Title,Status,Contador,ContText,TextButton,MsgText,Botao,VideoButton,VideoText } from './styles';
-import { IronSource } from '@wowmaking/react-native-iron-source';
 import IronSourceController from '../../controller/isronSource';
+import { useNavigation } from "@react-navigation/native";
 
 interface Iron{
   componentDidMount: Function;
@@ -12,43 +12,40 @@ interface Iron{
   showOfferwall: Function;
 }
 
-const Reward: React.FC = ({ navigation }) => {
+const Reward: React.FC = () => {
+  const navigation = useNavigation();
+  
   var ironSourceController: Iron = new IronSourceController();
   React.useEffect(()=>{
     ironSourceController.componentDidMount();
+    bonus()
   },[])
 
 const[time, setTime] = React.useState('00:00');
-var bonusTimer = 60 * 5;
-var active = false;
-function startTimer(duration) {
-  var timer = duration, minutes, seconds;
-  setInterval(function () {
-      minutes = parseInt(timer / 60, 10);
-      seconds = parseInt(timer % 60, 10);
-
-      minutes = minutes < 10 ? "0" + minutes : minutes;
-      seconds = seconds < 10 ? "0" + seconds : seconds;
-
-      setTime(minutes + ":" + seconds)
-
-      if (--timer < 0) {
-          timer = duration;
-      }
-  }, 1000);
-}
-React.useEffect(()=>{
-if (bonusTimer == 0){
-  active = true;
-}else{
-  startTimer(bonusTimer);
-}
-
-},[])
+var active = false
 
 function bonus(){
-  bonusTimer = 60 * 5
-  startTimer(bonusTimer);
+
+  const now = new Date(); // Data de hoje
+  const past = new Date('2020-09-21'); // Outra data no passado
+  const diff = Math.abs(now.getTime() - past.getTime()); // Subtrai uma data pela outra
+  const days = Math.ceil(diff / (1000 * 60 * 60 * 24)); // Divide o total pelo total de milisegundos correspondentes a 1 dia. (1000 milisegundos = 1 segundo).
+  var data2 = now.getHours() + now.getMinutes() + now.getSeconds();
+
+  function formatar_segundos(h,min,s) {
+ return (h*3600)+(min*60)+(s);
+}
+
+var data = formatar_segundos(23,14,32);
+
+function data_format(value) {
+ var h = Math.floor(value/3600);
+ var min = Math.floor((value - (h*3600))/60);
+ var s = value - (Math.floor(value/60)*60);
+ return h + "h "+ min + "min "+s + "s";
+}
+
+var diferenca = data_format(data-data2);
 }
   return (
     <Container>

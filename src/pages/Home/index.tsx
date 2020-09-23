@@ -1,5 +1,6 @@
 import React from 'react';
-import {Image, View, Text } from 'react-native';
+import { ScrollView } from 'react-native';
+import { useNavigation } from "@react-navigation/native";
 import { user } from '../../user/user';
 import { AntDesign,Entypo } from '@expo/vector-icons';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -7,10 +8,11 @@ import { Container,UserContainer,UserImage,UserName,Point,PointText,Mural,Add,Re
   Title,ContainerRef,RefText,Drop,ConteinerRefDrop,DropImage,DropText,RefConteiner,
   Btn, Message, Shop,BtnText,Gun,GunText,Status } from './styles';
 
-const Home: React.FC = ({ navigation }) => {
-
+const Home: React.FC = () => {
+  const navigation = useNavigation();
   return (
     <Container>
+
       <Status>
       <TouchableOpacity
       onPress={()=>navigation.goBack()}
@@ -23,14 +25,15 @@ const Home: React.FC = ({ navigation }) => {
       </TouchableOpacity>
       </Status>
       <UserContainer>
+      <TouchableOpacity onPress={()=> navigation.navigate("User")}>
       <UserImage
       source={{
         uri: 'https://api.adorable.io/avatars/93/abott@adorable.png',        
        }}
       />
+      </TouchableOpacity>
       <UserName>{user?.name}</UserName>
       </UserContainer>
-
       <Point>
       <PointText>Point: {user?.pontos}</PointText>
         <TouchableOpacity onPress={()=> navigation.navigate("Reward")}>
@@ -70,8 +73,6 @@ const Home: React.FC = ({ navigation }) => {
           <GunText>Marble Fade</GunText>
         </Gun>
         </Drop>
-       
-
       </Referal>
     </Container>
   );

@@ -1,14 +1,15 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { useNavigation } from "@react-navigation/native";
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { Container,ImageBackground,Header,Main,Title,Input,Buton,ButtonText,Referal,
-  Info,SkInfo } from './styles';
+import { Container,ImageBackground,Header,Main,Title,Input,Buton,ButtonText,Footer,
+  Already,ContainerSign,Sign} from './styles';
 
 const Register: React.FC = () => {
+  const navigation = useNavigation();
   const[ email, setEmail] = React.useState('');
   const[ pass, setPass] = React.useState('');
   const[ confPass, setConfPass] = React.useState('');
-  const[ referal, setReferal] = React.useState('');
+  
 
   return (
     <Container>
@@ -26,28 +27,29 @@ const Register: React.FC = () => {
       />
       <Input
       placeholder="Digite seu password"
-      onChangeText={text => setEmail(text)}
-      value={email}
+      onChangeText={text => setPass(text)}
+      value={pass}
       />
       <Input
       placeholder="Confirme seu password"
-      onChangeText={text => setEmail(text)}
-      value={email}
+      onChangeText={text => setConfPass(text)}
+      value={confPass}
       />
-      <Referal>
-        <Info> Use o referal code de um amigo ganhe 150 pontos </Info>
-        <SkInfo> Referal Code "SKINSLAB"</SkInfo>
-      </Referal>
-      <Input
-      placeholder="Referal Code"
-      onChangeText={text => setEmail(text)}
-      value={email}
-      />
+        <Footer>
+        <ContainerSign>
+          <Already>
+            Already a member?
+          </Already>
+          <TouchableOpacity onPress={()=> navigation.navigate("Login")}>
+            <Sign>Sign In</Sign>
+          </TouchableOpacity>
+        </ContainerSign>
       <Buton>
-      <TouchableOpacity onPress={() => signIn({ username, password })}>
+      <TouchableOpacity onPress={() => navigation.navigate("Referal")}>
         <ButtonText>Sign in</ButtonText>
       </TouchableOpacity>
     </Buton>
+        </Footer>
     </Main>
     </ImageBackground>
   </Container>
